@@ -1,4 +1,3 @@
-![Alt text](multi/static/logo-vertical-novo-modelo.png)
 # CCI Backend Django
 Supported by✨Allan Williams✨
 ## Tecnologias
