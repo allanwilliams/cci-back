@@ -1,5 +1,5 @@
 from django.contrib import admin
-from cadastros.models import Corretora, Cliente, ImagemLote,Lote, ContatoCliente, Loteamento, Quadra, Venda, \
+from cadastros.models import Imobiliaria, Cliente, ImagemLote,Lote, ContatoCliente, Loteamento, Quadra, Venda, DocumentoCliente, \
     STATUS_LOTE_VENDIDO, STATUS_LOTE_RESERVADO,STATUS_LOTE_DEVOLVIDO, STATUS_VENDA_CANCELADA, STATUS_VENDA_REALIZADA, STATUS_VENDA_ENTRADA_PAGA
 
 class ImagemLoteInline(admin.StackedInline):
@@ -14,9 +14,14 @@ class ContatoClienteInline(admin.StackedInline):
     extra = 1
 
     fields = ('tipo','contato','is_whatsapp')
+class DocumentoClienteInline(admin.StackedInline):
+    model = DocumentoCliente
+    extra = 1
 
-@admin.register(Corretora)
-class CorretoraAdmin(admin.ModelAdmin):
+    fields = ('tipo','cliente','documento')
+
+@admin.register(Imobiliaria)
+class ImobiliariaAdmin(admin.ModelAdmin):
     list_display = [
         'id','nome'
     ]
@@ -30,7 +35,7 @@ class LoteamentoAdmin(admin.ModelAdmin):
         'id','nome'
     ]
 
-    fields = ('nome','sobre','corretora','foto')
+    fields = ('nome','sobre','imobiliaria','foto')
 
 @admin.register(Quadra)
 class QuadraAdmin(admin.ModelAdmin):
@@ -66,6 +71,7 @@ class ClienteAdmin(admin.ModelAdmin):
 
     inlines = [
         ContatoClienteInline,
+        DocumentoClienteInline
     ]
 
 @admin.register(Venda)

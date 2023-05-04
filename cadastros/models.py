@@ -35,6 +35,17 @@ STATUS_VENDA_CHOICE = (
     (STATUS_VENDA_CANCELADA,STATUS_VENDA_CANCELADA)
 )
 
+TIPO_DOCUMENTO_RG = "RG"
+TIPO_DOCUMENTO_CPF = "CPF"
+TIPO_DOCUMENTO_ENDERECO = "ENDEREÇO"
+TIPO_DOCUMENTO_CASAMENTO = "CASAMENTO"
+
+TIPOS_DOCUMENTOS_CHOICES = (
+    (TIPO_DOCUMENTO_RG,TIPO_DOCUMENTO_RG),
+    (TIPO_DOCUMENTO_CPF,TIPO_DOCUMENTO_CPF),
+    (TIPO_DOCUMENTO_ENDERECO,TIPO_DOCUMENTO_ENDERECO),
+    (TIPO_DOCUMENTO_CASAMENTO,TIPO_DOCUMENTO_CASAMENTO),
+)
 class BaseModel(models.Model):
     criado_em = models.DateTimeField(blank=True, null=True)
     criado_por = models.ForeignKey(User,
@@ -70,10 +81,17 @@ class BaseModel(models.Model):
                                     using=None,
                                     update_fields=None)
 
-class Corretora(BaseModel):
+class Cidade(BaseModel):
+    nome = models.CharField(max_length=50,blank=True, null=True)
+
+class Regiao(BaseModel):
+    nome = models.CharField(max_length=50,blank=True, null=True)
+    cidade = models.ForeignKey(Cidade,on_delete=models.DO_NOTHING,blank=True, null=True)
+
+class Imobiliaria(BaseModel):
     nome = models.CharField(max_length=50)
     sobre = models.TextField()
-    foto = models.ImageField(blank=True, null=True, upload_to='store/cadastros/corretora-anexo/')
+    foto = models.ImageField(blank=True, null=True, upload_to='store/cadastros/imobiliaria-anexo/')
 
     def __str__(self):
         return self.nome
@@ -82,7 +100,8 @@ class Loteamento(BaseModel):
     nome = models.CharField(max_length=50)
     sobre = models.TextField()
     foto = models.ImageField(blank=True, null=True,upload_to='store/cadastros/loteamento-anexo/')
-    corretora = models.ForeignKey(Corretora,blank=True, null=True,on_delete=models.DO_NOTHING)
+    imobiliaria = models.ForeignKey(Imobiliaria,blank=True, null=True,on_delete=models.DO_NOTHING)
+    regiao = models.ForeignKey(Regiao,blank=True, null=True,on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.nome
@@ -101,7 +120,6 @@ class Lote(BaseModel):
 
     def __str__(self):
         return f'{self.quadra} - {self.identificacao}'
-
 class ImagemLote(BaseModel):
     lote = models.ForeignKey(Lote, verbose_name="Imagem Lote", on_delete=models.DO_NOTHING)
     foto = models.ImageField(upload_to='store/cadastros/imagem-lote-anexo/')
@@ -122,6 +140,11 @@ class ContatoCliente(BaseModel):
     contato = models.CharField(max_length=200)
     is_whatsapp = models.BooleanField("Possui Whatsapp?",blank=True, null=True)
     cliente = models.ForeignKey(Cliente,on_delete=models.DO_NOTHING)
+
+class DocumentoCliente(BaseModel):
+    cliente = models.ForeignKey(Cliente, verbose_name="Documento Cliente", on_delete=models.DO_NOTHING)
+    documento = models.FileField(upload_to="store/cadastros/imagem-lote-anexo/", max_length=100)
+    tipo = models.CharField(max_length=50,blank=True, null=True, choices=TIPOS_DOCUMENTOS_CHOICES)
 
 class Venda(BaseModel):
     lote = models.ForeignKey(Lote, on_delete=models.DO_NOTHING)

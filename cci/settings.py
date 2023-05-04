@@ -25,10 +25,9 @@ SECRET_KEY = 'django-insecure-%l7_%&rat=v#3s5$p)s&&@utw$y&1!_6q8==du@0dt@8aw41(m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.32', '127.0.0.1']
 
-
-# Application definition
+# Application definition'
 
 APPS_IMPORTS = [
     'jazzmin',
