@@ -1,0 +1,38 @@
+<form id="buscaimovel" method="post">
+  <section class='bg-success text-white'>
+    <div class='d-flex flex-row justify-content-around'>
+      <h2>Encontre seu imóvel:</h2>
+      <div class='d-flex flex-row gap-3 '>
+          <div>
+            <select class="form-control" name="cidade">
+                <option value="0">Cidade</option>
+                {% for cidade in default_context.cidades %}
+                  <option value="{{cidade.id}}">{{cidade.nome}}</option>
+                {% endfor %}
+            </select>
+          </div>
+          <div>
+            <select class="form-control" name="regiao">
+                <option value="0">Região</option>
+                {% for regiao in default_context.regioes %}
+                  <option value="{{regiao.id}}">{{regiao.nome}}</option>
+                {% endfor %}
+            </select>
+          </div>
+          <div>
+            <select class="form-control" name="loteamento">
+                <option value="0">Loteamento</option>
+            </select>
+          </div>
+          <div>
+            <select class="form-control" name="faixa">
+                <option value="0">Faixa de Preço</option>
+            </select>
+          </div>
+          <div class="form-label submit">
+            <button class='btn btn-primary' type="submit" id="buttonBuscar" value="Buscar"> Buscar</button>
+          </div>
+      </div>
+    </div>
+  </section>
+</form>

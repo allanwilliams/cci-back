@@ -9,12 +9,13 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import environ
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+ROOT_DIR = (environ.Path(__file__) - 2)
+APPS_DIR = ROOT_DIR.path("cci_apps")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-%l7_%&rat=v#3s5$p)s&&@utw$y&1!_6q8==du@0dt@8aw41(m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.32', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.1.32', '127.0.0.1','localhost']
 
 # Application definition'
 
@@ -42,7 +43,8 @@ APPS_IMPORTS = [
 
 
 LOCAL_APPS = [
-    'cadastros'
+    'cci_apps.cadastros',
+    'cci_apps.cci_site'
 ]
 
 INSTALLED_APPS = APPS_IMPORTS + LOCAL_APPS
@@ -124,9 +126,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 MEDIA_URL = "/media/"
 STATIC_URL = 'static/'
-STATIC_ROOT = '/static/'
+#STATIC_ROOT = '/static/'
+STATIC_ROOT = str(APPS_DIR.path("static"))
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "/static/"
+STATICFILES_DIRS = [
+    str(APPS_DIR("staticfiles")),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
