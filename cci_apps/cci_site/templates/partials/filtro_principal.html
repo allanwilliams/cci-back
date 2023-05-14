@@ -1,4 +1,5 @@
-<form id="buscaimovel" method="post">
+<form id="buscaimovel" method="post" action={% url 'buscar_imovel' %}>
+  {% csrf_token %}
   <section class='bg-success text-white'>
     <div class='d-flex flex-row justify-content-around'>
       <h2>Encontre seu imóvel:</h2>
@@ -22,11 +23,18 @@
           <div>
             <select class="form-control" name="loteamento">
                 <option value="0">Loteamento</option>
+                {% for loteamento in default_context.loteamentos %}
+                  <option value="{{loteamento.id}}">{{loteamento.nome}}</option>
+                {% endfor %}
             </select>
           </div>
           <div>
             <select class="form-control" name="faixa">
                 <option value="0">Faixa de Preço</option>
+                <option value="1">R$ 20.000 - 40.000</option>
+                <option value="2">R$ 40.000 - 60.000</option>
+                <option value="3">R$ 60.000 - 80.000</option>
+                <option value="4">R$ 80.000...</option>
             </select>
           </div>
           <div class="form-label submit">

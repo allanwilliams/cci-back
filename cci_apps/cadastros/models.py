@@ -129,6 +129,9 @@ class Lote(BaseModel):
 
     def __str__(self):
         return f'{self.quadra} - {self.identificacao}'
+
+    def get_images(self):
+        return ImagemLote.objects.filter(lote=self)
     
 class ImagemLote(BaseModel):
     lote = models.ForeignKey(Lote, verbose_name="Imagem Lote", on_delete=models.DO_NOTHING)

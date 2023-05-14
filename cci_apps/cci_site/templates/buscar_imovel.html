@@ -1,0 +1,14 @@
+{% extends 'base/cci_site_base.html' %}
+{% load static %}
+{% block content %}
+    <section id="buscar_imovel">
+        {% for lote in lotes %}
+            <h3>{{lote}}</h3>
+            <div class="d-flex">
+                {% for imagem in lote.get_images %}
+                    <img class="img-fluid" src={{imagem.foto.url}} />
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}

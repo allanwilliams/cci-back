@@ -35,7 +35,7 @@ class LoteamentoAdmin(admin.ModelAdmin):
         'id','nome'
     ]
 
-    fields = ('nome','sobre','imobiliaria','foto')
+    fields = ('nome','sobre','imobiliaria','foto','regiao')
 
 @admin.register(Quadra)
 class QuadraAdmin(admin.ModelAdmin):
