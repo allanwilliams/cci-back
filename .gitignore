@@ -52,8 +52,8 @@ coverage.xml
 *.pot
 
 # Django stuff:
-multi/staticfiles/
-multi/staticfiles
+cci_apps/staticfiles
+cci_apps/staticfiles
 
 # Sphinx documentation
 docs/_build/

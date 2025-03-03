@@ -39,6 +39,7 @@ APPS_IMPORTS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ajax_select'
 ]
 
 

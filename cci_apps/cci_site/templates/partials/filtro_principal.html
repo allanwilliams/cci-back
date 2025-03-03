@@ -1,45 +1,58 @@
 <form id="buscaimovel" method="post" action={% url 'buscar_imovel' %}>
   {% csrf_token %}
-  <section class='bg-success text-white'>
-    <div class='d-flex flex-row justify-content-around'>
-      <h2>Encontre seu imóvel:</h2>
-      <div class='d-flex flex-row gap-3 '>
-          <div>
-            <select class="form-control" name="cidade">
-                <option value="0">Cidade</option>
-                {% for cidade in default_context.cidades %}
-                  <option value="{{cidade.id}}">{{cidade.nome}}</option>
-                {% endfor %}
+  <section class='bg-lightblue text-dark py-2'>
+    <div class='container'>
+      <div class="row justify-content-center">
+        <h2 class="col-12 text-center mb-4" style="color: #0033cc;">Encontre seu imóvel:</h2>
+        
+        <!-- Barra de filtro ajustada para responsividade -->
+        <div class="row col-12 justify-content-between gap-y-3">
+          <!-- Filtro de Cidade -->
+          <div class="col-12 col-md-3 col-lg-3">
+            <select class="form-control" name="cidade" style="border-color: #ff0000;">
+              <option value="0">Cidade</option>
+              {% for cidade in default_context.cidades %}
+                <option value="{{cidade.id}}">{{cidade.nome}}</option>
+              {% endfor %}
             </select>
           </div>
-          <div>
-            <select class="form-control" name="regiao">
-                <option value="0">Região</option>
-                {% for regiao in default_context.regioes %}
-                  <option value="{{regiao.id}}">{{regiao.nome}}</option>
-                {% endfor %}
+
+          <!-- Filtro de Região -->
+          <div class="col-12 col-md-3 col-lg-3">
+            <select class="form-control" name="regiao" style="border-color: #ff0000;">
+              <option value="0">Região</option>
+              {% for regiao in default_context.regioes %}
+                <option value="{{regiao.id}}">{{regiao.nome}}</option>
+              {% endfor %}
             </select>
           </div>
-          <div>
-            <select class="form-control" name="loteamento">
-                <option value="0">Loteamento</option>
-                {% for loteamento in default_context.loteamentos %}
-                  <option value="{{loteamento.id}}">{{loteamento.nome}}</option>
-                {% endfor %}
+
+          <!-- Filtro de Loteamento -->
+          <div class="col-12 col-md-3 col-lg-3">
+            <select class="form-control" name="loteamento" style="border-color: #ff0000;">
+              <option value="0">Loteamento</option>
+              {% for loteamento in default_context.loteamentos %}
+                <option value="{{loteamento.id}}">{{loteamento.nome}}</option>
+              {% endfor %}
             </select>
           </div>
-          <div>
-            <select class="form-control" name="faixa">
-                <option value="0">Faixa de Preço</option>
-                <option value="1">R$ 20.000 - 40.000</option>
-                <option value="2">R$ 40.000 - 60.000</option>
-                <option value="3">R$ 60.000 - 80.000</option>
-                <option value="4">R$ 80.000...</option>
+
+          <!-- Filtro de Faixa de Preço -->
+          <div class="col-12 col-md-3 col-lg-3">
+            <select class="form-control" name="faixa" style="border-color: #ff0000;">
+              <option value="0">Faixa de Preço</option>
+              <option value="1">R$ 20.000 - 40.000</option>
+              <option value="2">R$ 40.000 - 60.000</option>
+              <option value="3">R$ 60.000 - 80.000</option>
+              <option value="4">R$ 80.000...</option>
             </select>
           </div>
-          <div class="form-label submit">
-            <button class='btn btn-primary' type="submit" id="buttonBuscar" value="Buscar"> Buscar</button>
+
+          <!-- Botão de Busca -->
+          <div class="col-12 text-center mt-3">
+            <button class="btn btn-danger" type="submit" id="buttonBuscar" value="Buscar">Buscar</button>
           </div>
+        </div>
       </div>
     </div>
   </section>
